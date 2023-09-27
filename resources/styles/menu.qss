@@ -1,0 +1,19 @@
+
+QFrame#newContinueFrame {
+    margin-bottom: 60px;
+}
+
+QFrame#menuButtonsContainer {
+    margin:0px 0px 25px 20px;
+}
+
+QPushButton {
+    margin: 0px 0px 12px 0px;
+}
+
+
+
+
+
+
+

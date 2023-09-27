@@ -1,0 +1,28 @@
+QFrame#interfaceLayout {
+    border: 5px solid #654B31;
+    border-radius: 5px;
+}
+
+QFrame#interfaceLayoutFrame {
+    margin: 5px 15px 15px 5px;
+}
+
+QFrame#interfaceExitConfirmationLayout {
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+QPushButton#exitButton {
+    background-image: url("resources/images/icons/door-closed-96.png");
+    border: 0px solid #973B17;
+    margin: 2px;
+}
+
+QPushButton#exitButton:hover {
+    border: 0px solid #CF3B17;
+}
+
+QPushButton#exitButton:pressed {
+    font-size: 32px;
+    margin: 0px;
+}

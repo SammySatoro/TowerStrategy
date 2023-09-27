@@ -1,0 +1,49 @@
+QSlider {
+    margin-bottom: 5px;
+}
+
+QSlider::groove:horizontal {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #B1B1B1, stop:1 #c4c4c4);
+    height: 10px;
+    width: 200px;
+    background-color: #F29913;
+    border: 1px solid #777777;
+    border-radius: 5px;
+}
+QSlider::handle:horizontal {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #eeeeee, stop:1 #dddddd);
+    border: 1px solid #777777;
+    width: 10px;
+    margin: -5px 0;
+    border-radius: 2px;
+}
+
+QPushButton {
+    font-size: 24px;
+    font-family: "JetBrains Mono";
+    text-decoration: none;
+    width: 100px;
+    height: 40px;
+    font-weight: bold;
+    text-align: center;
+    background: transparent;
+    border: none;
+    color: #1D3038;
+}
+
+QPushButton:hover {
+    color: #F29913;
+}
+
+QLabel {
+    font-size: 15px;
+    font-family: "JetBrains Mono";
+    text-decoration: none;
+    width: 100px;
+    height: 40px;
+    font-weight: bold;
+    text-align: center;
+    background: transparent;
+    border: none;
+    color: #1D3038;
+}

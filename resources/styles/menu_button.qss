@@ -1,0 +1,17 @@
+QPushButton {
+    font-size: 24px;
+    font-family: "JetBrains Mono";
+    text-decoration: none;
+    width: 150px;
+    height: 45px;
+    font-weight: bold;
+    text-align: center;
+    padding: 1px 5px;
+    background: transparent;
+    border: none;
+    color: #1D3038;
+}
+
+QPushButton:hover {
+    color: #F29913;
+}

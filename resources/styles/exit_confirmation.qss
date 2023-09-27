@@ -1,0 +1,31 @@
+QLabel {
+    font-size: 24px;
+    font-family: "JetBrains Mono";
+    text-decoration: none;
+    font-weight: bold;
+    text-align:center;
+    color: #F29913;
+}
+
+QPushButton {
+    font-size: 24px;
+    font-family: "JetBrains Mono";
+    text-decoration: none;
+    width:75px;
+    height: 45px;
+    font-weight: bold;
+    margin:0px 0px 0px 0px;
+    text-align:center;
+    padding: 1px 5px;
+    background: transparent;
+    color: #1D3038;
+}
+
+QPushButton:hover {
+    color: #F29913;
+}
+
+QFrame#containerFrame {
+    background-color: transparent;
+    margin-bottom: 50px;
+}
