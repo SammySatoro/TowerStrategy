@@ -8,6 +8,7 @@ from views.GameLoadView import GameLoadView
 from views.MainMenuView import MainMenuView
 from views.OptionsView import OptionsView
 from views.GameView import GameView
+from views.game_interface.InterfaceExitConfirmationLayout import InterfaceExitConfirmationLayout
 
 
 class MainController(QMainWindow):
@@ -44,6 +45,7 @@ class MainController(QMainWindow):
         self.options_page.back_button.clicked.connect(self.goto_main_menu)
         self.exit_confirmation_page.no_button.clicked.connect(self.goto_main_menu)
         self.game_load_page.new_game_button.clicked.connect(self.goto_game)
+        self.game_page.interface_main_frame.interface_exit_confirmation_layout.quit_button.clicked.connect(self.goto_main_menu)
 
 
 

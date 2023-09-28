@@ -13,9 +13,3 @@ class InterfaceExitButton(QPushButton):
 
         self.setObjectName("exitButton")
         self.setFixedSize(50, 88)
-
-    def on_click(self):
-        if self.is_clicked:
-            pass
-        else:
-            pass

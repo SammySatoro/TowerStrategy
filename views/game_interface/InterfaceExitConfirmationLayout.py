@@ -1,5 +1,5 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QHBoxLayout, QFrame
+from PyQt6.QtWidgets import QHBoxLayout, QFrame, QWidget
 
 from controls.python.StylesheetLoader import StylesheetLoader
 from widgets.Color import Color

@@ -12,6 +12,11 @@ QFrame#interfaceExitConfirmationLayout {
     margin-right: 20px;
 }
 
+QFrame#towerBattleLayoutFrame {
+    border: 5px solid #7FD673;
+    border-radius: 5px;
+}
+
 QPushButton#exitButton {
     background-image: url("resources/images/icons/door-closed-96.png");
     border: 0px solid #973B17;
@@ -25,4 +30,19 @@ QPushButton#exitButton:hover {
 QPushButton#exitButton:pressed {
     font-size: 32px;
     margin: 0px;
+}
+
+QPushButton#cellButton {
+    border: 1px solid #37322F;
+    border-radius: 2px;
+    background-color: #D7CAC2;
+}
+
+QPushButton#cellButton:hover {
+    background-color: #5F5A57;
+}
+
+QPushButton#cellButton:pressed {
+    margin: 1px;
+    background-color: #37322F;
 }
