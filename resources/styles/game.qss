@@ -46,3 +46,8 @@ QPushButton#cellButton:pressed {
     margin: 1px;
     background-color: #37322F;
 }
+
+QPushButton#gameInterfaceButton {
+    border: 2px solid transparent;
+    background-repeat: no-repeat;
+}

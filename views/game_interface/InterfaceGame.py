@@ -1,11 +1,9 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QHBoxLayout, QFrame, QPushButton
+from PyQt6.QtWidgets import QHBoxLayout, QFrame
 
-from controls.python.StylesheetLoader import StylesheetLoader
+from controls.python.RandomWallsGenerator import RandomWallsGenerator
 from views.game_interface.SharedVariables import SharedVariablesManager
-from widgets.Color import Color
-from widgets.MenuButton import MenuButton
-import test
+from widgets.GameInterfaceButton import GameInterfaceButton
 
 
 class InterfaceGame(QFrame):
@@ -15,20 +13,22 @@ class InterfaceGame(QFrame):
         self.layout = QHBoxLayout()
         self.layout.setSpacing(0)
         self.layout.setContentsMargins(0, 0, 0, 0)
-        self.random_walls_button = QPushButton("RANDOM")
-        self.clear_walls_button = QPushButton("CLEAR")
+        self.start_game_button = GameInterfaceButton("", "resources/images/icons/play-64.png")
+        self.random_walls_button = GameInterfaceButton("", "resources/images/icons/random-64.png")
+        self.clear_walls_button = GameInterfaceButton("", "resources/images/icons/clear-64.png")
         self.random_walls_button.clicked.connect(self.place_random_walls)
         self.clear_walls_button.clicked.connect(self.clear_walls)
 
+        self.layout.addWidget(self.start_game_button, Qt.AlignmentFlag.AlignCenter)
         self.layout.addWidget(self.random_walls_button, Qt.AlignmentFlag.AlignCenter)
         self.layout.addWidget(self.clear_walls_button, Qt.AlignmentFlag.AlignCenter)
 
         self.setLayout(self.layout)
 
     def place_random_walls(self):
-        test.main()
-        self.shared_player.selected_combinations = test.all_ship_coordinates
-        test.all_ship_coordinates = []
+        random_walls_generator = RandomWallsGenerator()
+        random_walls_generator.generate()
+        self.shared_player.selected_combinations = random_walls_generator.get_all_wall_coordinates()
 
     def clear_walls(self):
         self.shared_player.clear_grid()
