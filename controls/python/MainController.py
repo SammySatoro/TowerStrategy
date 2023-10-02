@@ -44,7 +44,8 @@ class MainController(QMainWindow):
         self.menu_page.play_button.clicked.connect(self.goto_game_load)
         self.options_page.back_button.clicked.connect(self.goto_main_menu)
         self.exit_confirmation_page.no_button.clicked.connect(self.goto_main_menu)
-        self.game_load_page.new_game_button.clicked.connect(self.goto_game)
+        self.game_load_page.new_game_button.clicked.connect(self.goto_new_game)
+        self.game_load_page.continue_button.clicked.connect(self.goto_continue_game_page)
         self.game_page.interface_main_frame.interface_exit_confirmation_layout.quit_button.clicked.connect(self.goto_main_menu)
 
 
@@ -64,8 +65,16 @@ class MainController(QMainWindow):
     def goto_game_load(self):
         self.central_widget.setCurrentWidget(self.game_load_page)
 
-    def goto_game(self):
+    def goto_new_game(self):
+        self._set_new_game_page()
+        self.central_widget.setCurrentWidget(self.game_page)
+
+    def _set_new_game_page(self):
+        self.game_page.interface_main_frame.interface_game.clear_walls_button.click()
+
+    def goto_continue_game_page(self):
         self.central_widget.setCurrentWidget(self.game_page)
 
     def goto_exit_confirmation(self):
         self.central_widget.setCurrentWidget(self.exit_confirmation_page)
+

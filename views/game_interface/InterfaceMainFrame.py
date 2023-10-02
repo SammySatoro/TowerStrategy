@@ -16,6 +16,7 @@ class InterfaceMainFrame(QFrame):
         self.interface_game = InterfaceGame()
         self.interface_frame.interface_exit_button.clicked.connect(self.toggle_layout)
         self.interface_exit_confirmation_layout.continue_button.clicked.connect(self.toggle_layout)
+        self.interface_exit_confirmation_layout.quit_button.clicked.connect(self.toggle_layout)
 
         self.stacked_interface_layout = QStackedLayout()
         self.stacked_interface_layout.addWidget(self.interface_game)

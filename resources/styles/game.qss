@@ -12,8 +12,13 @@ QFrame#interfaceExitConfirmationLayout {
     margin-right: 20px;
 }
 
-QFrame#towerBattleLayoutFrame {
+QFrame#towerBattleGridPlayer {
     border: 5px solid #7FD673;
+    border-radius: 5px;
+}
+
+QFrame#towerBattleGridEnemy {
+    border: 5px solid #D45C1D;
     border-radius: 5px;
 }
 

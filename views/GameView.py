@@ -14,8 +14,8 @@ class GameView(QWidget):
         main_layout.setSpacing(0)
         main_layout.setContentsMargins(0, 0, 0, 0)
 
-        self.interface_main_frame = InterfaceMainFrame()
         self.tower_battle_frame = TowerBattleMainFrame()
+        self.interface_main_frame = InterfaceMainFrame()
 
         main_layout.addWidget(self.tower_battle_frame.tower_battle_frame)
         main_layout.addWidget(self.interface_main_frame.interface_frame)

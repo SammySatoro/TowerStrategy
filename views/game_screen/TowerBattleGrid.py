@@ -28,6 +28,12 @@ class TowerBattleGrid(QFrame):
 
         self.setLayout(self.grid_layout)
 
+    def get_cells_data(self):
+        cells_data = []
+        for row in range(10):
+            for column in range(10):
+                cells_data.append(self.grid_layout.itemAtPosition(row, column).widget().get_data())
+        return cells_data
 
     def mouseMoveEvent(self, event):
         if self.shared_player.check_available_combinations() and self.shared_player.is_dragging and event.buttons() & Qt.MouseButton.LeftButton:

@@ -51,5 +51,21 @@ class GameCellButton(QPushButton):
                     self.tower_battle_grid.grid_layout.itemAtPosition(cell[1], cell[0]).widget().is_selected = False
                 self.shared_player.selected_cells = []
 
+    def get_data(self):
+        data = {
+            "x": self.x,
+            "y": self.y,
+            "adjacent_cells": self.adjacent_cells,
+            "is_selected": self.is_selected,
+            "is_built": self.is_built,
+            "is_destroyed": self.is_destroyed
+        }
+        return data
 
-
+    def set_data(self, data):
+        self.x = data["x"]
+        self.y = data["y"]
+        self.adjacent_cells = data["adjacent_cells"]
+        self.is_selected = data["is_selected"]
+        self.is_built = data["is_built"]
+        self.is_destroyed = data["is_destroyed"]
