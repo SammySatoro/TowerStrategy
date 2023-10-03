@@ -7,9 +7,9 @@ from widgets.GameCellButton import GameCellButton
 
 
 class TowerBattleGrid(QFrame):
-    def __init__(self):
+    def __init__(self, is_enemy=False):
         super().__init__()
-
+        self.is_enemy = is_enemy
         self.shared_player = SharedVariablesManager().shared_variables_player
 
         StylesheetLoader(self).load_stylesheet("resources/styles/game.qss")
@@ -24,6 +24,8 @@ class TowerBattleGrid(QFrame):
                 cell_button = GameCellButton(self, "", col, row)
                 cell_button.setObjectName("cellButton")
                 cell_button.setFixedSize(36, 36)
+                if self.is_enemy:
+                    cell_button.is_enemy = True
                 self.grid_layout.addWidget(cell_button, row, col)
 
         self.setLayout(self.grid_layout)
@@ -36,7 +38,8 @@ class TowerBattleGrid(QFrame):
         return cells_data
 
     def mouseMoveEvent(self, event):
-        if self.shared_player.check_available_combinations() and self.shared_player.is_dragging and event.buttons() & Qt.MouseButton.LeftButton:
+        if not self.is_enemy and self.shared_player.check_available_combinations() and self.shared_player.is_dragging \
+                and event.buttons() & Qt.MouseButton.LeftButton:
             child = self.childAt(event.pos())
             if isinstance(child, GameCellButton) and not child.is_selected:
                 cellXY = (child.x, child.y)

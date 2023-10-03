@@ -55,4 +55,11 @@ QPushButton#cellButton:pressed {
 QPushButton#gameInterfaceButton {
     border: 2px solid transparent;
     background-repeat: no-repeat;
+    font-size: 24px;
+    font-family: "JetBrains Mono";
+    font-weight: bold;
+    text-align: center;
+    background: transparent;
+    border: none;
+    color: #1D3038;
 }

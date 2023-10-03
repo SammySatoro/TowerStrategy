@@ -18,8 +18,8 @@ class InterfaceGame(QFrame):
         self.start_game_button = GameInterfaceButton("", "resources/images/icons/play-64.png")
         self.random_walls_button = GameInterfaceButton("", "resources/images/icons/random-64.png")
         self.clear_walls_button = GameInterfaceButton("", "resources/images/icons/clear-64.png")
-        self.start_game_button.clicked.connect(self.game_controller.save_game)
-        self.random_walls_button.clicked.connect(self.place_random_walls)
+        self.start_game_button.clicked.connect(self.start_new_game)
+        self.random_walls_button.clicked.connect(self.generate_player_random_walls)
         self.clear_walls_button.clicked.connect(self.clear_walls)
 
         self.layout.addWidget(self.start_game_button, Qt.AlignmentFlag.AlignCenter)
@@ -30,12 +30,17 @@ class InterfaceGame(QFrame):
 
 
     def start_new_game(self):
-        self.shared_player.game_controller.start_game()
+        self.game_controller.shared_enemy.selected_combinations = self.get_random_walls()
+        self.game_controller.start_game()
 
-    def place_random_walls(self):
+    def generate_player_random_walls(self):
+        self.game_controller.shared_player.selected_combinations = self.get_random_walls()
+
+    def get_random_walls(self):
         random_walls_generator = RandomWallsGenerator()
         random_walls_generator.generate()
-        self.shared_player.selected_combinations = random_walls_generator.get_all_wall_coordinates()
+        return random_walls_generator.get_all_wall_coordinates()
 
     def clear_walls(self):
-        self.shared_player.clear_grid()
+        self.game_controller.shared_player.clear_grid()
+        self.game_controller.shared_enemy.clear_grid()

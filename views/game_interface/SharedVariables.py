@@ -70,7 +70,7 @@ class SharedVariables():
         self.combinations[4] = 1
         for row in range(10):
             for col in range(10):
-                self.tower_battle_grid.grid_layout.itemAtPosition(row, col).widget().is_selected = False
+                self.tower_battle_grid.grid_layout.itemAtPosition(row, col).widget().clear_state()
                 self.tower_battle_grid.grid_layout.itemAtPosition(row, col).widget().adjacent_cells = []
 
     def place_walls(self, combinations: list):
@@ -84,6 +84,15 @@ class SharedVariables():
             self.tower_battle_grid.grid_layout.itemAtPosition(cell[1], cell[0]).widget().is_selected = False
             self.tower_battle_grid.grid_layout.itemAtPosition(cell[1], cell[0]).widget().adjacent_cells = []
 
+    def is_destroyed_wall(self, game_cell):
+        for cell in game_cell.adjacent_cells:
+            if not self.tower_battle_grid.grid_layout.itemAtPosition(cell[1], cell[0]).widget().is_broken:
+                return False
+        return True
+
+    def destroy_wall(self, game_cell):
+        for cell in game_cell.adjacent_cells:
+            self.tower_battle_grid.grid_layout.itemAtPosition(cell[1], cell[0]).widget().is_destroyed = True
 
     def get_available_combinations(self):
         return [key for key, value in self.combinations.items() if value > 0]
@@ -106,9 +115,6 @@ class SharedVariables():
                 return True
         return False
 
-
-    def set_cell_background_color(self, cell, color: str):
-        cell.setStyleSheet(f"background-color: {color};")
 
     def flatten_array(self, array: list):
        return [element for sublist in array for element in sublist]

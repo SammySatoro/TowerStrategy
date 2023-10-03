@@ -8,7 +8,7 @@ from views.GameLoadView import GameLoadView
 from views.MainMenuView import MainMenuView
 from views.OptionsView import OptionsView
 from views.GameView import GameView
-from views.game_interface.InterfaceExitConfirmationLayout import InterfaceExitConfirmationLayout
+from controls.python.GameController import GameController
 
 
 class MainController(QMainWindow):
@@ -70,7 +70,7 @@ class MainController(QMainWindow):
         self.central_widget.setCurrentWidget(self.game_page)
 
     def _set_new_game_page(self):
-        self.game_page.interface_main_frame.interface_game.clear_walls_button.click()
+        GameController().start_new_game()
 
     def goto_continue_game_page(self):
         self.central_widget.setCurrentWidget(self.game_page)
