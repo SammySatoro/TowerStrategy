@@ -49,7 +49,7 @@ class GameController(metaclass=GameControllerMeta):
 
     def start_game(self):
         self.game_started = True
-        self.enemy_turn = random.choice([True, False])
+        self.enemy_turn = random.choice([True, True, True, False, False])
         self.timer_controller.start_timer()
         self.save_game()
 
