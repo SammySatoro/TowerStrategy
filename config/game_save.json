@@ -570,8 +570,25 @@
         {
             "x": 3,
             "y": 6,
-            "adjacent_cells": [],
-            "is_selected": false,
+            "adjacent_cells": [
+                [
+                    3,
+                    6
+                ],
+                [
+                    4,
+                    6
+                ],
+                [
+                    5,
+                    6
+                ],
+                [
+                    6,
+                    6
+                ]
+            ],
+            "is_selected": true,
             "is_broken": false,
             "is_destroyed": false,
             "is_enemy": false
@@ -579,8 +596,25 @@
         {
             "x": 4,
             "y": 6,
-            "adjacent_cells": [],
-            "is_selected": false,
+            "adjacent_cells": [
+                [
+                    3,
+                    6
+                ],
+                [
+                    4,
+                    6
+                ],
+                [
+                    5,
+                    6
+                ],
+                [
+                    6,
+                    6
+                ]
+            ],
+            "is_selected": true,
             "is_broken": false,
             "is_destroyed": false,
             "is_enemy": false
@@ -588,8 +622,25 @@
         {
             "x": 5,
             "y": 6,
-            "adjacent_cells": [],
-            "is_selected": false,
+            "adjacent_cells": [
+                [
+                    3,
+                    6
+                ],
+                [
+                    4,
+                    6
+                ],
+                [
+                    5,
+                    6
+                ],
+                [
+                    6,
+                    6
+                ]
+            ],
+            "is_selected": true,
             "is_broken": false,
             "is_destroyed": false,
             "is_enemy": false
@@ -597,8 +648,25 @@
         {
             "x": 6,
             "y": 6,
-            "adjacent_cells": [],
-            "is_selected": false,
+            "adjacent_cells": [
+                [
+                    3,
+                    6
+                ],
+                [
+                    4,
+                    6
+                ],
+                [
+                    5,
+                    6
+                ],
+                [
+                    6,
+                    6
+                ]
+            ],
+            "is_selected": true,
             "is_broken": false,
             "is_destroyed": false,
             "is_enemy": false
@@ -914,13 +982,8 @@
         {
             "x": 1,
             "y": 0,
-            "adjacent_cells": [
-                [
-                    1,
-                    0
-                ]
-            ],
-            "is_selected": true,
+            "adjacent_cells": [],
+            "is_selected": false,
             "is_broken": false,
             "is_destroyed": false,
             "is_enemy": true
@@ -937,8 +1000,17 @@
         {
             "x": 3,
             "y": 0,
-            "adjacent_cells": [],
-            "is_selected": false,
+            "adjacent_cells": [
+                [
+                    3,
+                    0
+                ],
+                [
+                    3,
+                    1
+                ]
+            ],
+            "is_selected": true,
             "is_broken": false,
             "is_destroyed": false,
             "is_enemy": true
@@ -955,8 +1027,13 @@
         {
             "x": 5,
             "y": 0,
-            "adjacent_cells": [],
-            "is_selected": false,
+            "adjacent_cells": [
+                [
+                    5,
+                    0
+                ]
+            ],
+            "is_selected": true,
             "is_broken": false,
             "is_destroyed": false,
             "is_enemy": true
@@ -964,17 +1041,8 @@
         {
             "x": 6,
             "y": 0,
-            "adjacent_cells": [
-                [
-                    6,
-                    0
-                ],
-                [
-                    7,
-                    0
-                ]
-            ],
-            "is_selected": true,
+            "adjacent_cells": [],
+            "is_selected": false,
             "is_broken": false,
             "is_destroyed": false,
             "is_enemy": true
@@ -982,17 +1050,8 @@
         {
             "x": 7,
             "y": 0,
-            "adjacent_cells": [
-                [
-                    6,
-                    0
-                ],
-                [
-                    7,
-                    0
-                ]
-            ],
-            "is_selected": true,
+            "adjacent_cells": [],
+            "is_selected": false,
             "is_broken": false,
             "is_destroyed": false,
             "is_enemy": true
@@ -1045,8 +1104,17 @@
         {
             "x": 3,
             "y": 1,
-            "adjacent_cells": [],
-            "is_selected": false,
+            "adjacent_cells": [
+                [
+                    3,
+                    0
+                ],
+                [
+                    3,
+                    1
+                ]
+            ],
+            "is_selected": true,
             "is_broken": false,
             "is_destroyed": false,
             "is_enemy": true
@@ -1103,6 +1171,18 @@
                 [
                     9,
                     1
+                ],
+                [
+                    9,
+                    2
+                ],
+                [
+                    9,
+                    3
+                ],
+                [
+                    9,
+                    4
                 ]
             ],
             "is_selected": true,
@@ -1122,21 +1202,8 @@
         {
             "x": 1,
             "y": 2,
-            "adjacent_cells": [
-                [
-                    1,
-                    2
-                ],
-                [
-                    1,
-                    3
-                ],
-                [
-                    1,
-                    4
-                ]
-            ],
-            "is_selected": true,
+            "adjacent_cells": [],
+            "is_selected": false,
             "is_broken": false,
             "is_destroyed": false,
             "is_enemy": true
@@ -1162,25 +1229,8 @@
         {
             "x": 4,
             "y": 2,
-            "adjacent_cells": [
-                [
-                    4,
-                    2
-                ],
-                [
-                    4,
-                    3
-                ],
-                [
-                    4,
-                    4
-                ],
-                [
-                    4,
-                    5
-                ]
-            ],
-            "is_selected": true,
+            "adjacent_cells": [],
+            "is_selected": false,
             "is_broken": false,
             "is_destroyed": false,
             "is_enemy": true
@@ -1188,263 +1238,40 @@
         {
             "x": 5,
             "y": 2,
-            "adjacent_cells": [],
-            "is_selected": false,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
-            "x": 6,
-            "y": 2,
-            "adjacent_cells": [],
-            "is_selected": false,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
-            "x": 7,
-            "y": 2,
-            "adjacent_cells": [],
-            "is_selected": false,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
-            "x": 8,
-            "y": 2,
-            "adjacent_cells": [],
-            "is_selected": false,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
-            "x": 9,
-            "y": 2,
-            "adjacent_cells": [],
-            "is_selected": false,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
-            "x": 0,
-            "y": 3,
-            "adjacent_cells": [],
-            "is_selected": false,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
-            "x": 1,
-            "y": 3,
             "adjacent_cells": [
                 [
-                    1,
+                    5,
                     2
                 ],
-                [
-                    1,
-                    3
-                ],
-                [
-                    1,
-                    4
-                ]
-            ],
-            "is_selected": true,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
-            "x": 2,
-            "y": 3,
-            "adjacent_cells": [],
-            "is_selected": false,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
-            "x": 3,
-            "y": 3,
-            "adjacent_cells": [],
-            "is_selected": false,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
-            "x": 4,
-            "y": 3,
-            "adjacent_cells": [
-                [
-                    4,
-                    2
-                ],
-                [
-                    4,
-                    3
-                ],
-                [
-                    4,
-                    4
-                ],
-                [
-                    4,
-                    5
-                ]
-            ],
-            "is_selected": true,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
-            "x": 5,
-            "y": 3,
-            "adjacent_cells": [],
-            "is_selected": false,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
-            "x": 6,
-            "y": 3,
-            "adjacent_cells": [],
-            "is_selected": false,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
-            "x": 7,
-            "y": 3,
-            "adjacent_cells": [],
-            "is_selected": false,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
-            "x": 8,
-            "y": 3,
-            "adjacent_cells": [],
-            "is_selected": false,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
-            "x": 9,
-            "y": 3,
-            "adjacent_cells": [],
-            "is_selected": false,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
-            "x": 0,
-            "y": 4,
-            "adjacent_cells": [],
-            "is_selected": false,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
-            "x": 1,
-            "y": 4,
-            "adjacent_cells": [
-                [
-                    1,
-                    2
-                ],
-                [
-                    1,
-                    3
-                ],
-                [
-                    1,
-                    4
-                ]
-            ],
-            "is_selected": true,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
-            "x": 2,
-            "y": 4,
-            "adjacent_cells": [],
-            "is_selected": false,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
-            "x": 3,
-            "y": 4,
-            "adjacent_cells": [],
-            "is_selected": false,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
-            "x": 4,
-            "y": 4,
-            "adjacent_cells": [
-                [
-                    4,
-                    2
-                ],
-                [
-                    4,
-                    3
-                ],
-                [
-                    4,
-                    4
-                ],
-                [
-                    4,
-                    5
-                ]
-            ],
-            "is_selected": true,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
-            "x": 5,
-            "y": 4,
-            "adjacent_cells": [],
-            "is_selected": false,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
-            "x": 6,
-            "y": 4,
-            "adjacent_cells": [
                 [
                     6,
-                    4
+                    2
                 ],
                 [
                     7,
-                    4
+                    2
+                ]
+            ],
+            "is_selected": true,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 6,
+            "y": 2,
+            "adjacent_cells": [
+                [
+                    5,
+                    2
+                ],
+                [
+                    6,
+                    2
+                ],
+                [
+                    7,
+                    2
                 ]
             ],
             "is_selected": true,
@@ -1454,18 +1281,259 @@
         },
         {
             "x": 7,
-            "y": 4,
+            "y": 2,
             "adjacent_cells": [
                 [
+                    5,
+                    2
+                ],
+                [
                     6,
-                    4
+                    2
                 ],
                 [
                     7,
+                    2
+                ]
+            ],
+            "is_selected": true,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 8,
+            "y": 2,
+            "adjacent_cells": [],
+            "is_selected": false,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 9,
+            "y": 2,
+            "adjacent_cells": [
+                [
+                    9,
+                    1
+                ],
+                [
+                    9,
+                    2
+                ],
+                [
+                    9,
+                    3
+                ],
+                [
+                    9,
                     4
                 ]
             ],
             "is_selected": true,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 0,
+            "y": 3,
+            "adjacent_cells": [
+                [
+                    0,
+                    3
+                ],
+                [
+                    0,
+                    4
+                ]
+            ],
+            "is_selected": true,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 1,
+            "y": 3,
+            "adjacent_cells": [],
+            "is_selected": false,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 2,
+            "y": 3,
+            "adjacent_cells": [],
+            "is_selected": false,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 3,
+            "y": 3,
+            "adjacent_cells": [],
+            "is_selected": false,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 4,
+            "y": 3,
+            "adjacent_cells": [],
+            "is_selected": false,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 5,
+            "y": 3,
+            "adjacent_cells": [],
+            "is_selected": false,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 6,
+            "y": 3,
+            "adjacent_cells": [],
+            "is_selected": false,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 7,
+            "y": 3,
+            "adjacent_cells": [],
+            "is_selected": false,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 8,
+            "y": 3,
+            "adjacent_cells": [],
+            "is_selected": false,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 9,
+            "y": 3,
+            "adjacent_cells": [
+                [
+                    9,
+                    1
+                ],
+                [
+                    9,
+                    2
+                ],
+                [
+                    9,
+                    3
+                ],
+                [
+                    9,
+                    4
+                ]
+            ],
+            "is_selected": true,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 0,
+            "y": 4,
+            "adjacent_cells": [
+                [
+                    0,
+                    3
+                ],
+                [
+                    0,
+                    4
+                ]
+            ],
+            "is_selected": true,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 1,
+            "y": 4,
+            "adjacent_cells": [],
+            "is_selected": false,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 2,
+            "y": 4,
+            "adjacent_cells": [],
+            "is_selected": false,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 3,
+            "y": 4,
+            "adjacent_cells": [],
+            "is_selected": false,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 4,
+            "y": 4,
+            "adjacent_cells": [],
+            "is_selected": false,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 5,
+            "y": 4,
+            "adjacent_cells": [
+                [
+                    5,
+                    4
+                ]
+            ],
+            "is_selected": true,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 6,
+            "y": 4,
+            "adjacent_cells": [],
+            "is_selected": false,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 7,
+            "y": 4,
+            "adjacent_cells": [],
+            "is_selected": false,
             "is_broken": false,
             "is_destroyed": false,
             "is_enemy": true
@@ -1485,11 +1553,19 @@
             "adjacent_cells": [
                 [
                     9,
-                    4
+                    1
                 ],
                 [
                     9,
-                    5
+                    2
+                ],
+                [
+                    9,
+                    3
+                ],
+                [
+                    9,
+                    4
                 ]
             ],
             "is_selected": true,
@@ -1536,25 +1612,8 @@
         {
             "x": 4,
             "y": 5,
-            "adjacent_cells": [
-                [
-                    4,
-                    2
-                ],
-                [
-                    4,
-                    3
-                ],
-                [
-                    4,
-                    4
-                ],
-                [
-                    4,
-                    5
-                ]
-            ],
-            "is_selected": true,
+            "adjacent_cells": [],
+            "is_selected": false,
             "is_broken": false,
             "is_destroyed": false,
             "is_enemy": true
@@ -1598,17 +1657,8 @@
         {
             "x": 9,
             "y": 5,
-            "adjacent_cells": [
-                [
-                    9,
-                    4
-                ],
-                [
-                    9,
-                    5
-                ]
-            ],
-            "is_selected": true,
+            "adjacent_cells": [],
+            "is_selected": false,
             "is_broken": false,
             "is_destroyed": false,
             "is_enemy": true
@@ -1711,9 +1761,40 @@
         {
             "x": 0,
             "y": 7,
+            "adjacent_cells": [],
+            "is_selected": false,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 1,
+            "y": 7,
+            "adjacent_cells": [],
+            "is_selected": false,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 2,
+            "y": 7,
+            "adjacent_cells": [],
+            "is_selected": false,
+            "is_broken": false,
+            "is_destroyed": false,
+            "is_enemy": true
+        },
+        {
+            "x": 3,
+            "y": 7,
             "adjacent_cells": [
                 [
-                    0,
+                    3,
+                    7
+                ],
+                [
+                    4,
                     7
                 ]
             ],
@@ -1723,37 +1804,19 @@
             "is_enemy": true
         },
         {
-            "x": 1,
-            "y": 7,
-            "adjacent_cells": [],
-            "is_selected": false,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
-            "x": 2,
-            "y": 7,
-            "adjacent_cells": [],
-            "is_selected": false,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
-            "x": 3,
-            "y": 7,
-            "adjacent_cells": [],
-            "is_selected": false,
-            "is_broken": false,
-            "is_destroyed": false,
-            "is_enemy": true
-        },
-        {
             "x": 4,
             "y": 7,
-            "adjacent_cells": [],
-            "is_selected": false,
+            "adjacent_cells": [
+                [
+                    3,
+                    7
+                ],
+                [
+                    4,
+                    7
+                ]
+            ],
+            "is_selected": true,
             "is_broken": false,
             "is_destroyed": false,
             "is_enemy": true
@@ -1824,21 +1887,8 @@
         {
             "x": 2,
             "y": 8,
-            "adjacent_cells": [
-                [
-                    2,
-                    8
-                ],
-                [
-                    3,
-                    8
-                ],
-                [
-                    4,
-                    8
-                ]
-            ],
-            "is_selected": true,
+            "adjacent_cells": [],
+            "is_selected": false,
             "is_broken": false,
             "is_destroyed": false,
             "is_enemy": true
@@ -1846,21 +1896,8 @@
         {
             "x": 3,
             "y": 8,
-            "adjacent_cells": [
-                [
-                    2,
-                    8
-                ],
-                [
-                    3,
-                    8
-                ],
-                [
-                    4,
-                    8
-                ]
-            ],
-            "is_selected": true,
+            "adjacent_cells": [],
+            "is_selected": false,
             "is_broken": false,
             "is_destroyed": false,
             "is_enemy": true
@@ -1868,21 +1905,8 @@
         {
             "x": 4,
             "y": 8,
-            "adjacent_cells": [
-                [
-                    2,
-                    8
-                ],
-                [
-                    3,
-                    8
-                ],
-                [
-                    4,
-                    8
-                ]
-            ],
-            "is_selected": true,
+            "adjacent_cells": [],
+            "is_selected": false,
             "is_broken": false,
             "is_destroyed": false,
             "is_enemy": true
@@ -1899,8 +1923,21 @@
         {
             "x": 6,
             "y": 8,
-            "adjacent_cells": [],
-            "is_selected": false,
+            "adjacent_cells": [
+                [
+                    6,
+                    8
+                ],
+                [
+                    7,
+                    8
+                ],
+                [
+                    8,
+                    8
+                ]
+            ],
+            "is_selected": true,
             "is_broken": false,
             "is_destroyed": false,
             "is_enemy": true
@@ -1908,8 +1945,21 @@
         {
             "x": 7,
             "y": 8,
-            "adjacent_cells": [],
-            "is_selected": false,
+            "adjacent_cells": [
+                [
+                    6,
+                    8
+                ],
+                [
+                    7,
+                    8
+                ],
+                [
+                    8,
+                    8
+                ]
+            ],
+            "is_selected": true,
             "is_broken": false,
             "is_destroyed": false,
             "is_enemy": true
@@ -1917,8 +1967,21 @@
         {
             "x": 8,
             "y": 8,
-            "adjacent_cells": [],
-            "is_selected": false,
+            "adjacent_cells": [
+                [
+                    6,
+                    8
+                ],
+                [
+                    7,
+                    8
+                ],
+                [
+                    8,
+                    8
+                ]
+            ],
+            "is_selected": true,
             "is_broken": false,
             "is_destroyed": false,
             "is_enemy": true
@@ -1953,8 +2016,13 @@
         {
             "x": 2,
             "y": 9,
-            "adjacent_cells": [],
-            "is_selected": false,
+            "adjacent_cells": [
+                [
+                    2,
+                    9
+                ]
+            ],
+            "is_selected": true,
             "is_broken": false,
             "is_destroyed": false,
             "is_enemy": true
