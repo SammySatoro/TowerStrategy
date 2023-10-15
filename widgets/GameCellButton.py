@@ -20,6 +20,7 @@ class GameCellButton(QPushButton):
         self._is_broken = False
         self._is_destroyed = False
         self.is_enemy = False
+        self.durability = 0
 
         StylesheetLoader(self).load_stylesheet("resources/styles/game.qss")
 
