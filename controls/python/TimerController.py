@@ -1,5 +1,4 @@
 from PyQt6.QtCore import QTimer
-from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QPushButton
 
 
@@ -63,7 +62,6 @@ class TimerController(metaclass=TimerControllerMeta):
     def pause(self):
         self.game_controller.interface_main_frame.interface_play.pause_resume_button.set_icon(
             "resources/images/icons/resume-64.png")
-        self._remaining_time = self.timer.remainingTime()
         self.game_controller.is_paused = not self.game_controller.is_paused
         self.timer.stop()
 

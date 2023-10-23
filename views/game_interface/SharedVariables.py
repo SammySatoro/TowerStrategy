@@ -108,7 +108,7 @@ class SharedVariables():
                 and len(self.selected_cells) in self.get_available_combinations():
             self.is_dragging = False
 
-    def are_cell_close(self, cell: tuple):
+    def are_cells_close(self, cell: tuple):
         flatten_array = self.flatten_array(self.selected_combinations)
         for c in flatten_array:
             if (cell[1] in (c[1] - 1, c[1], c[1] + 1)) and (cell[0] in (c[0] - 1, c[0], c[0] + 1)):

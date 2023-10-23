@@ -1,5 +1,6 @@
-:- dynamic matrix/1.
 :- dynamic cells/1.
+:- dynamic matrix/1.
+:- dynamic wall_cells/1.
 :- dynamic last_move/1.
 :- dynamic nesw_cells/1.
 :- dynamic possible_cells/1.
@@ -38,11 +39,16 @@ test(Cell, Data) :-
 %    write(Value),
 %    last_move([X, Y]),
 %    write(X), write(Y), nl,
-    find_current_wall_cells(Cell, _),
+%    find_current_wall_cells(Cell, _),
 %    current_wall_cells(X),
 %    write(X), nl,
 %    write(Cells), nl,
+    wall_cells(WC),
+    write(WC),
     Data = Cells.
+
+test2(Res, X):-
+    X = Res.
 
 shoot([X, Y]) :-
     matrix(M),
@@ -103,35 +109,35 @@ define_possible_cells :-
 %    assertz(current_wall_cells(NonZeroCells4)).
 
 
-find_current_wall_cells([X, Y], [PrevX, PrevY]) :-
-    matrix(M),
-    T is Y - 1, B is Y + 1, L is X - 1, R is X + 1,
-    NonZeroCells = [],
-    (between(0, 9, T) -> get_matrix_value(M, [X, T], ValueT) ; ValueT = -1, true),
-    (ValueT > 0, ValueT =\= -1 -> append([[X, T]], NonZeroCells, NonZeroCells1) ; NonZeroCells1 = NonZeroCells, true),
-    (between(0, 9, B) -> get_matrix_value(M, [X, B], ValueB) ; ValueB = -1, true),
-    (ValueB > 0, ValueB =\= -1 -> append([[X, B]], NonZeroCells1, NonZeroCells2); NonZeroCells2 = NonZeroCells1, true),
-    (between(0, 9, L) -> get_matrix_value(M, [L, Y], ValueL) ; ValueL = -1, true),
-    (ValueL > 0, ValueL =\= -1 -> append([[L, Y]], NonZeroCells2, NonZeroCells3); NonZeroCells3 = NonZeroCells2, true),
-    (between(0, 9, R) -> get_matrix_value(M, [R, Y], ValueR) ; ValueR = -1, true),
-    (ValueR > 0, ValueR =\= -1 -> append([[R, Y]], NonZeroCells3, NonZeroCells4); NonZeroCells4 = NonZeroCells3, true),
-    none_zero_cells(NZC),
-    (length(NZC, 0) -> retractall(none_zero_cells(_)) ; true),
-    assertz(none_zero_cells(NonZeroCells4)),
-    none_zero_cells(NZC2),
-    write("NZC2"), write(" = "), write(NZC2), nl,
-    (\+ length(NZC2, 0) -> iterate_non_zero_cells(NZC2) ; true),
-    none_zero_cells(NZC3),
-    NonZeroCells5 = [[X,Y]|NZC3],
-    retractall(current_wall_cells(_)),
-    assertz(current_wall_cells(NonZeroCells5)).
-
-iterate_non_zero_cells([]).
-iterate_non_zero_cells([[X,Y]|T]) :-
-    retractall(none_zero_cells(_)),
-    assertz(none_zero_cells(T)),
-    find_current_wall_cells([X,Y], _),
-    iterate_non_zero_cells(T).
+%find_current_wall_cells([X, Y], [PrevX, PrevY]) :-
+%    matrix(M),
+%    T is Y - 1, B is Y + 1, L is X - 1, R is X + 1,
+%    NonZeroCells = [],
+%    (between(0, 9, T) -> get_matrix_value(M, [X, T], ValueT) ; ValueT = -1, true),
+%    (ValueT > 0, ValueT =\= -1 -> append([[X, T]], NonZeroCells, NonZeroCells1) ; NonZeroCells1 = NonZeroCells, true),
+%    (between(0, 9, B) -> get_matrix_value(M, [X, B], ValueB) ; ValueB = -1, true),
+%    (ValueB > 0, ValueB =\= -1 -> append([[X, B]], NonZeroCells1, NonZeroCells2); NonZeroCells2 = NonZeroCells1, true),
+%    (between(0, 9, L) -> get_matrix_value(M, [L, Y], ValueL) ; ValueL = -1, true),
+%    (ValueL > 0, ValueL =\= -1 -> append([[L, Y]], NonZeroCells2, NonZeroCells3); NonZeroCells3 = NonZeroCells2, true),
+%    (between(0, 9, R) -> get_matrix_value(M, [R, Y], ValueR) ; ValueR = -1, true),
+%    (ValueR > 0, ValueR =\= -1 -> append([[R, Y]], NonZeroCells3, NonZeroCells4); NonZeroCells4 = NonZeroCells3, true),
+%    none_zero_cells(NZC),
+%    (length(NZC, 0) -> retractall(none_zero_cells(_)) ; true),
+%    assertz(none_zero_cells(NonZeroCells4)),
+%    none_zero_cells(NZC2),
+%    write("NZC2"), write(" = "), write(NZC2), nl,
+%    (\+ length(NZC2, 0) -> iterate_non_zero_cells(NZC2) ; true),
+%    none_zero_cells(NZC3),
+%    NonZeroCells5 = [[X,Y]|NZC3],
+%    retractall(current_wall_cells(_)),
+%    assertz(current_wall_cells(NonZeroCells5)).
+%
+%iterate_non_zero_cells([]).
+%iterate_non_zero_cells([[X,Y]|T]) :-
+%    retractall(none_zero_cells(_)),
+%    assertz(none_zero_cells(T)),
+%    find_current_wall_cells([X,Y], _),
+%    iterate_non_zero_cells(T).
 
 %find_current_wall_cells([X, Y]) :-
 %    matrix(M),

@@ -56,13 +56,14 @@ class GameCellButton(QPushButton):
 
     def mousePressEvent(self, event):
         if not self.is_enemy:
-            if event.button() == Qt.MouseButton.LeftButton:
-                self.game_controller.shared_player.is_dragging = True
-            if event.button() == Qt.MouseButton.RightButton:
-                if self.is_selected:
-                    self.game_controller.shared_player.delete_wall(self)
+            if not self.game_controller.game_started:
+                if event.button() == Qt.MouseButton.LeftButton:
+                    self.game_controller.shared_player.is_dragging = True
+                if event.button() == Qt.MouseButton.RightButton:
+                    if self.is_selected:
+                        self.game_controller.shared_player.delete_wall(self)
         else:
-            if event.button() == Qt.MouseButton.LeftButton:
+            if not self.game_controller.enemy_turn and event.button() == Qt.MouseButton.LeftButton:
                 if self.is_selected:
                     self.is_broken = True
                     if self.is_broken and self.game_controller.shared_enemy.is_destroyed_wall(self):

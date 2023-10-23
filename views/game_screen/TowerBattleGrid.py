@@ -44,7 +44,7 @@ class TowerBattleGrid(QFrame):
             if isinstance(child, GameCellButton) and not child.is_selected:
                 cellXY = (child.x, child.y)
                 if cellXY not in self.shared_player.selected_cells:
-                    if self.shared_player.are_cell_close(cellXY):
+                    if self.shared_player.are_cells_close(cellXY):
                         for cell in self.shared_player.selected_cells:
                             self.grid_layout.itemAtPosition(cell[1], cell[0]).widget().is_selected = False
                             self.grid_layout.itemAtPosition(cell[1], cell[0]).widget().adjacent_cells = []

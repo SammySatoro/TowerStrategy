@@ -4,6 +4,7 @@ from pyswip import Prolog
 from PyQt6.QtWidgets import QApplication
 
 from controls.python.MainController import MainController
+from views.game_interface.SharedVariables import SharedVariablesManager
 
 
 def main():
@@ -17,12 +18,32 @@ def test():
     prolog = Prolog()
     prolog.consult("file.pl")
 
-    matrix1 = [[0, 1, 0, 1, 2, 1, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],[1, 3, 0, 0, 0, 0, 0, 1, 1, 0],[1, 3, 0, 2, 0, 0, 0, 0, 0, 0],[0, 0, 0, 1, 1, 0, 0, 0, 0, 0],[0, 1, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 1, 0, 1, 0, 0, 0, 0],[0, 0, 0, 1, 0, 1, 0, 0, 0, 0],[0, 1, 0, 0, 0, 0, 0, 0, 0, 1],[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+    matrix1 = [
+        [0, 0, 0, 1, 0, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0, 1, 1, 0, 0],
+        [0, 1, 0, 0, 0, 0, 1, 0, 0, 0],
+        [0, 3, 0, 0, 0, 0, 0, 0, 0, 1],
+        [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 2, 0, 1, 1, 2, 0, 1, 0, 1],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 1, 1, 0, 0]
+    ]
 
-    matrix2 = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+    # shared_variables_player = SharedVariablesManager().shared_variables_player
+    wall_cells = [
+        [[7, 0], [7, 1], [6, 1], [6, 2]],
+        [[1, 2], [1, 3], [1, 4]],
+        [[3, 6], [4, 6], [5, 6]],
+        [[9, 6], [9, 7]],
+        [[6, 9], [7, 9]],
+        [[1, 8], [2, 8]],
+        [[3, 0]],
+        [[7, 6]],
+        [[9, 3]],
+        [[1, 6]]
+    ]
 
     cells = [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0], [8, 0], [9, 0], [0, 1], [1, 1], [2, 1],
         [3, 1], [4, 1], [5, 1], [6, 1], [7, 1], [8, 1], [9, 1], [0, 2], [1, 2], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2],
@@ -35,6 +56,7 @@ def test():
 
     prolog.assertz(f"cells({cells})")
     prolog.assertz(f"matrix({matrix1})")
+    prolog.assertz(f"wall_cells({wall_cells})")
 
     # solution = list(prolog.query("random_cell(Cell)"))
     # print(solution)
@@ -62,6 +84,5 @@ def test():
     print(list(prolog.query("current_wall_cells(X)")))
 
 
-
 if __name__ == '__main__':
-    test()
+    main()
