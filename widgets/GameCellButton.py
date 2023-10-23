@@ -3,7 +3,6 @@ from PyQt6.QtWidgets import QPushButton
 
 from controls.python.GameController import GameController
 from controls.python.StylesheetLoader import StylesheetLoader
-from views.game_interface.SharedVariables import SharedVariablesManager
 
 
 class GameCellButton(QPushButton):
@@ -70,6 +69,7 @@ class GameCellButton(QPushButton):
                         self.game_controller.shared_enemy.destroy_wall(self)
                 else:
                     self.set_background_color("blue")
+                self.game_controller.timer_controller.switch_turn()
 
     def mouseReleaseEvent(self, event):
         if len(self.game_controller.shared_player.selected_cells) > 0:

@@ -46,11 +46,14 @@ class TimerController(metaclass=TimerControllerMeta):
         self.timer_button.setText(str(self._current_time))
         self._move_duration[self.game_controller.enemy_turn] -= 1
         if self._move_duration[self.game_controller.enemy_turn] <= -1:
-            if self.game_controller.enemy_turn:
-                self._move_duration[self.game_controller.enemy_turn] = 2
-            else:
-                self._move_duration[self.game_controller.enemy_turn] = 10
-            self.game_controller.enemy_turn = not self.game_controller.enemy_turn
+            self.switch_turn()
+
+    def switch_turn(self):
+        if self.game_controller.enemy_turn:
+            self._move_duration[self.game_controller.enemy_turn] = 2
+        else:
+            self._move_duration[self.game_controller.enemy_turn] = 10
+        self.game_controller.enemy_turn = not self.game_controller.enemy_turn
 
 
     def pause_resume_button_click(self):
