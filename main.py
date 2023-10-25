@@ -4,7 +4,6 @@ from pyswip import Prolog
 from PyQt6.QtWidgets import QApplication
 
 from controls.python.MainController import MainController
-from views.game_interface.SharedVariables import SharedVariablesManager
 
 
 def main():
@@ -72,17 +71,18 @@ def test():
             print(item, end=" ")
         print()
 
-    lm = list(prolog.query(f"test([3,0], Data)"))
+    # lm = list(prolog.query(f"test([3,0], Data)"))
     # lm2 = list(prolog.query(f"test([1,2], Data)"))
     # lm3 = list(prolog.query(f"test([0,3], Data)"))
     # lm4 = list(prolog.query(f"test([0,2], Data)"))
 
-    print(lm)
+    # print(lm)
     # print(lm2)
     # print(lm3)
     # print(lm4)
-    print(list(prolog.query("current_wall_cells(X)")))
+    # print(list(prolog.query(f"get_possible_cells([1,2], Cells)")))
+    print(list(prolog.query(f"get_close_cells([8,9], Cells)"))[0]['Cells'])
 
-
+# [[9, 8], [8, 9], [8, 7], [8, 8], [9, 9], [9, 7]]
 if __name__ == '__main__':
     main()

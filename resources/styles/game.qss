@@ -41,6 +41,10 @@ QPushButton#cellButton {
     border: 1px solid #37322F;
     border-radius: 2px;
     background-color: #D7CAC2;
+    font-size: 24px;
+    font-family: "JetBrains Mono";
+    font-weight: bold;
+    text-align: center;
 }
 
 QPushButton#cellButton:hover {

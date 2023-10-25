@@ -13,11 +13,7 @@
 % unknown cells: 0
 % nontargetable cells: -1`
 
-% 1) Bot shoot a random cell
-% 2) a) If it misses, the cell becomes nontargetable;
-%    b) Else, adjacent to the cell cells from nesw become possible targets
-%       (if the cell has hp, it becomes most priority target)
-% 3) If possible target is shot, cells adjucent to it are also become possible targets.
+
 
 
 last_move.
@@ -43,12 +39,37 @@ test(Cell, Data) :-
 %    current_wall_cells(X),
 %    write(X), nl,
 %    write(Cells), nl,
-    wall_cells(WC),
-    write(WC),
     Data = Cells.
 
-test2(Res, X):-
-    X = Res.
+get_possible_cells(Cell, Cells) :-
+    matrix(M),
+    retractall(possible_cells(_)),
+    get_matrix_value(M, Cell, Value),
+    (Value =\= 0 ->
+        define_last_move(Cell),
+        define_possible_cells,
+        possible_cells(Cells)
+        ;
+        Cells = []
+    ).
+
+get_close_cells([X, Y], Cells) :-
+    T is Y - 1, B is Y + 1,
+    L is X - 1, R is X + 1,
+    Cells0 = [],
+    (between(0, 9, T) -> append([[X, T]], Cells0, Cells1); Cells1 = Cells0, true),
+    (between(0, 9, B) -> append([[X, B]], Cells1, Cells2); Cells2 = Cells1, true),
+    (between(0, 9, L) -> append([[L, Y]], Cells2, Cells3); Cells3 = Cells2, true),
+    (between(0, 9, R) -> append([[R, Y]], Cells3, Cells4); Cells4 = Cells3, true),
+    (between(0, 9, T) ->
+        (between(0, 9, L) -> append([[L, T]], Cells4, Cells5); Cells5 = Cells4, true),
+        (between(0, 9, R) -> append([[R, T]], Cells5, Cells6); Cells6 = Cells5, true)
+        ; Cells6 = Cells4, true),
+    (between(0, 9, B) ->
+        (between(0, 9, L) -> append([[L, B]], Cells6, Cells7); Cells7 = Cells6, true),
+        (between(0, 9, R) -> append([[R, B]], Cells7, Cells8); Cells8 = Cells7, true)
+        ; Cells8 = Cells6, true),
+    Cells = Cells8.
 
 shoot([X, Y]) :-
     matrix(M),

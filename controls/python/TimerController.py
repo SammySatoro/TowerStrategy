@@ -43,8 +43,10 @@ class TimerController(metaclass=TimerControllerMeta):
 
     def _process_move_countdown(self):
         self._current_time = self._move_duration[self.game_controller.enemy_turn]
-        self.timer_button.setText(str(self._current_time))
         self._move_duration[self.game_controller.enemy_turn] -= 1
+        self.timer_button.setText(str(self._current_time))
+        if self.game_controller.enemy_turn and self._move_duration[self.game_controller.enemy_turn] == 0:
+            self.game_controller.enemy_shoot()
         if self._move_duration[self.game_controller.enemy_turn] <= -1:
             self.switch_turn()
 

@@ -1,3 +1,5 @@
+import random
+
 from PyQt6.QtWidgets import QFrame
 
 
@@ -39,6 +41,17 @@ class SharedVariables():
             3: 2,
             4: 1
         }
+        self.available_cells = self._set_available_cells()
+        self.possible_cells = []
+        self.cells = [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0], [8, 0], [9, 0], [0, 1], [1, 1],
+            [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1], [8, 1], [9, 1], [0, 2], [1, 2], [2, 2], [3, 2], [4, 2],
+            [5, 2], [6, 2], [7, 2], [8, 2], [9, 2], [0, 3], [1, 3], [2, 3], [3, 3], [4, 3], [5, 3], [6, 3], [7, 3],
+            [8, 3], [9, 3], [0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [6, 4], [7, 4], [8, 4], [9, 4], [0, 5],
+            [1, 5], [2, 5], [3, 5], [4, 5], [5, 5], [6, 5], [7, 5], [8, 5], [9, 5], [0, 6], [1, 6], [2, 6], [3, 6],
+            [4, 6], [5, 6], [6, 6], [7, 6], [8, 6], [9, 6], [0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7],
+            [7, 7], [8, 7], [9, 7], [0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8], [8, 8], [9, 8],
+            [0, 9], [1, 9], [2, 9], [3, 9], [4, 9], [5, 9], [6, 9], [7, 9], [8, 9], [9, 9]]
+        self.walls_durabilities = [3, 3, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         self.tower_battle_grid = QFrame()
 
     @property
@@ -57,6 +70,25 @@ class SharedVariables():
         self.set_adjacent_cells()
         self.place_walls(self._selected_combinations)
 
+
+    def pick_random_cell(self):                                    # to prolog
+        target = random.choice(self.available_cells)
+        cell = self.tower_battle_grid.grid_layout.itemAtPosition(target[1], target[0]).widget()
+        cell.durability -= 1
+        return cell
+
+    def add_to_possible_cells(self, cells):
+        for cell in cells:
+            if cell not in self.possible_cells:
+                self.possible_cells.append(cells)
+
+    def _set_available_cells(self):
+        cells = []
+        for i in range(10):
+            for j in range(10):
+                cells.append([i, j])
+        return cells
+
     def set_adjacent_cells(self):
         for comb in self._selected_combinations:
             for c in comb:
@@ -68,6 +100,7 @@ class SharedVariables():
         self.combinations[2] = 3
         self.combinations[3] = 2
         self.combinations[4] = 1
+        self.walls_durabilities = [3, 3, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         for row in range(10):
             for col in range(10):
                 self.tower_battle_grid.grid_layout.itemAtPosition(row, col).widget().clear_state()
@@ -76,6 +109,14 @@ class SharedVariables():
     def place_walls(self, combinations: list):
         for cell in self.flatten_array(combinations):
             self.tower_battle_grid.grid_layout.itemAtPosition(cell[1], cell[0]).widget().is_selected = True
+        self.assign_durability()
+
+    def assign_durability(self):
+        self.walls_durabilities = [3, 3, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        for cell in self.flatten_array(self._selected_combinations):
+            durability = random.choice(self.walls_durabilities)
+            self.tower_battle_grid.grid_layout.itemAtPosition(cell[1], cell[0]).widget().durability = durability
+            self.walls_durabilities.remove(durability)
 
     def delete_wall(self, game_cell):
         self._selected_combinations.remove(game_cell.adjacent_cells)
@@ -86,7 +127,8 @@ class SharedVariables():
 
     def is_destroyed_wall(self, game_cell):
         for cell in game_cell.adjacent_cells:
-            if not self.tower_battle_grid.grid_layout.itemAtPosition(cell[1], cell[0]).widget().is_broken:
+            a_cell = self.tower_battle_grid.grid_layout.itemAtPosition(cell[1], cell[0]).widget()
+            if not a_cell.is_broken or not a_cell.durability == 0:
                 return False
         return True
 

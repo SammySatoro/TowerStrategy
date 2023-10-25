@@ -33,6 +33,9 @@ class GameController(metaclass=GameControllerMeta):
         self.timer_controller.timer_button = None
         self.timer_controller.game_controller = self
 
+        self.in_focus = False
+
+
     def check_game_save(self):
         print(JSONController().json_file_has_records(self.save_file))
         return JSONController().json_file_has_records(self.save_file)
@@ -61,6 +64,17 @@ class GameController(metaclass=GameControllerMeta):
         self.enemy_turn = random.choice([True, True, False, False, False])
         self.timer_controller.start_timer()
         self.save_game()
+        self.prolog_controller.assertz(f"matrix({self.get_durability_matrix()})")
+
+    def get_durability_matrix(self):
+        matrix = []
+        for i in range(10):
+            matrix.append([])
+            for j in range(10):
+                matrix[i].append(self.shared_player.tower_battle_grid.children()[i * 10 + j + 1].durability)
+                print(self.shared_player.tower_battle_grid.children()[i * 10 + j + 1].durability, end=" ")
+            print()
+        return matrix
 
         # matrix1 = [[0, 0, 0, 1, 0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 0, 1, 1, 0, 0], [0, 1, 0, 0, 0, 0, 1, 0, 0, 0],
         #     [0, 3, 0, 0, 0, 0, 0, 0, 0, 1], [0, 1, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -70,14 +84,7 @@ class GameController(metaclass=GameControllerMeta):
         # wall_cells = [[[7, 0], [7, 1], [6, 1], [6, 2]], [[1, 2], [1, 3], [1, 4]], [[3, 6], [4, 6], [5, 6]],
         #     [[9, 6], [9, 7]], [[6, 9], [7, 9]], [[1, 8], [2, 8]], [[3, 0]], [[7, 6]], [[9, 3]], [[1, 6]]]
         #
-        # cells = [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0], [8, 0], [9, 0], [0, 1], [1, 1], [2, 1],
-        #     [3, 1], [4, 1], [5, 1], [6, 1], [7, 1], [8, 1], [9, 1], [0, 2], [1, 2], [2, 2], [3, 2], [4, 2], [5, 2],
-        #     [6, 2], [7, 2], [8, 2], [9, 2], [0, 3], [1, 3], [2, 3], [3, 3], [4, 3], [5, 3], [6, 3], [7, 3], [8, 3],
-        #     [9, 3], [0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [6, 4], [7, 4], [8, 4], [9, 4], [0, 5], [1, 5],
-        #     [2, 5], [3, 5], [4, 5], [5, 5], [6, 5], [7, 5], [8, 5], [9, 5], [0, 6], [1, 6], [2, 6], [3, 6], [4, 6],
-        #     [5, 6], [6, 6], [7, 6], [8, 6], [9, 6], [0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [7, 7],
-        #     [8, 7], [9, 7], [0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8], [8, 8], [9, 8], [0, 9],
-        #     [1, 9], [2, 9], [3, 9], [4, 9], [5, 9], [6, 9], [7, 9], [8, 9], [9, 9]]
+
         #
         # self.prolog_controller.assertz(f"cells({cells})")
         # self.prolog_controller.assertz(f"matrix({matrix1})")
@@ -100,3 +107,19 @@ class GameController(metaclass=GameControllerMeta):
         self.shared_enemy.clear_grid()
         self.timer_controller.reset()
         self.is_paused = False
+
+    def enemy_shoot(self):
+        print("SHOOT!!!")
+        target = self.shared_player.pick_random_cell()
+        # possible_cells = self.prolog_controller.pull_query(f"get_possible_cells({target}, Cells)")
+
+        print(target)
+        # print(possible_cells)
+        for i in range(10):
+            for j in range(10):
+                print(self.shared_enemy.tower_battle_grid.children()[i * 10 + j + 1].durability, end=" ")
+            print()
+
+
+
+

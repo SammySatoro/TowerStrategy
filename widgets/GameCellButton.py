@@ -19,7 +19,7 @@ class GameCellButton(QPushButton):
         self._is_broken = False
         self._is_destroyed = False
         self.is_enemy = False
-        self.durability = 0
+        self._durability = -1
 
         StylesheetLoader(self).load_stylesheet("resources/styles/game.qss")
 
@@ -34,6 +34,37 @@ class GameCellButton(QPushButton):
             self.set_background_color(f"#D7CAC2" if self.is_enemy else f"green")
         else:
             self.set_background_color(f"#D7CAC2")
+            self.durability = 0
+            self.setText("")
+
+    @property
+    def durability(self):
+        return self._durability
+
+    @durability.setter
+    def durability(self, value):
+        self._durability = value
+        if self.is_selected:
+            self.setText(str(self.durability))
+            if self._durability == 0:
+                cells_count = len(self.adjacent_cells)
+                for cell in self.adjacent_cells:
+                    if self.tower_battle_grid.grid_layout.itemAtPosition(cell[1], cell[0]).widget().durability == 0:
+                        cells_count -= 1
+                if cells_count == 0:
+                    for cell in self.adjacent_cells:
+                        self.tower_battle_grid.grid_layout.itemAtPosition(cell[1], cell[0]).widget().durability = -1
+                        cells_to_destroy = self.game_controller.prolog_controller.pull_query(f"get_close_cells({[cell[0], cell[1]]}, X)")[0]['X']
+                        for ctd in cells_to_destroy:
+                            self.tower_battle_grid.grid_layout.itemAtPosition(ctd[1], ctd[0]).widget().durability = -1
+        if self._durability == -1:
+            if not self.game_controller.enemy_turn:
+                if [self.x, self.y] in self.game_controller.shared_enemy.cells:
+                    self.game_controller.shared_enemy.cells.remove([self.x, self.y])
+                else:
+                    if [self.x, self.y] in self.game_controller.shared_player.cells:
+                        self.game_controller.shared_player.cells.remove([self.x, self.y])
+            self.is_destroyed = True
 
     @property
     def is_broken(self):
@@ -43,6 +74,7 @@ class GameCellButton(QPushButton):
     def is_broken(self, value):
         self._is_broken = value
         self.set_background_color(f"yellow" if value else f"#D7CAC2")
+        self.durability -= 1
 
     @property
     def is_destroyed(self):
@@ -51,7 +83,10 @@ class GameCellButton(QPushButton):
     @is_destroyed.setter
     def is_destroyed(self, value):
         self._is_destroyed = value
-        self.set_background_color(f"black" if value else f"#D7CAC2")
+        if self.is_selected:
+            self.set_background_color(f"black" if value else f"#D7CAC2")
+        else:
+            self.set_background_color(f"blue" if value else f"#D7CAC2")
 
     def mousePressEvent(self, event):
         if not self.is_enemy:
@@ -93,7 +128,8 @@ class GameCellButton(QPushButton):
             "is_selected": self.is_selected,
             "is_broken": self.is_broken,
             "is_destroyed": self.is_destroyed,
-            "is_enemy": self.is_enemy
+            "is_enemy": self.is_enemy,
+            "durability": self.durability
         }
         return data
 
@@ -105,8 +141,13 @@ class GameCellButton(QPushButton):
         self.is_broken = data["is_broken"]
         self.is_destroyed = data["is_destroyed"]
         self.is_enemy = data["is_enemy"]
+        self.durability = data["durability"]
 
     def clear_state(self):
         self.is_selected = False
         self.is_broken = False
         self.is_destroyed = False
+
+    def on_shot(self):
+        if not self.is_enemy:
+            pass
