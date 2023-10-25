@@ -26,13 +26,13 @@ class OptionsView(QWidget):
         self.music_volume_slider = QSlider(Qt.Orientation.Horizontal)
         self.music_volume_label = QLabel(f"Music: ${OptionsController().current_music_volume * 100:.0f}")
         self.music_volume_slider.valueChanged.connect(self.change_music_volume_value)
-        self.music_volume_slider.setValue(OptionsController().current_music_volume * 100)
+        self.music_volume_slider.setValue(int(OptionsController().current_music_volume * 100))
 
 
         self.sounds_volume_slider = QSlider(Qt.Orientation.Horizontal)
         self.sounds_volume_label = QLabel(f"Sound: {OptionsController().current_sound_volume * 100:.0f}")
         self.sounds_volume_slider.valueChanged.connect(self.change_sound_volume_value)
-        self.sounds_volume_slider.setValue(OptionsController().current_sound_volume * 100)
+        self.sounds_volume_slider.setValue(int(OptionsController().current_sound_volume * 100))
 
 
 

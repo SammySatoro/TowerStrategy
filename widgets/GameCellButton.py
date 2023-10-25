@@ -45,13 +45,15 @@ class GameCellButton(QPushButton):
     def durability(self, value):
         self._durability = value
         if self.is_selected:
-            self.setText(str(self.durability))
+            if not self.is_enemy:
+                self.setText(str(self.durability))
             if self._durability == 0:
                 cells_count = len(self.adjacent_cells)
                 for cell in self.adjacent_cells:
                     if self.tower_battle_grid.grid_layout.itemAtPosition(cell[1], cell[0]).widget().durability == 0:
                         cells_count -= 1
                 if cells_count == 0:
+                    self.game_controller.in_focus = False
                     for cell in self.adjacent_cells:
                         self.tower_battle_grid.grid_layout.itemAtPosition(cell[1], cell[0]).widget().durability = -1
                         cells_to_destroy = self.game_controller.prolog_controller.pull_query(f"get_close_cells({[cell[0], cell[1]]}, X)")[0]['X']
@@ -82,6 +84,8 @@ class GameCellButton(QPushButton):
     @is_destroyed.setter
     def is_destroyed(self, value):
         self._is_destroyed = value
+        if value:
+            self.setText("")
         if self.is_selected:
             self.set_background_color(f"black" if value else f"#D7CAC2")
         else:
@@ -97,14 +101,20 @@ class GameCellButton(QPushButton):
                         self.game_controller.shared_player.delete_wall(self)
         else:
             if not self.game_controller.enemy_turn and event.button() == Qt.MouseButton.LeftButton:
-                if self.is_selected:
-                    self.is_broken = True
-                    self.durability -= 1
-                    if self.is_broken and self.game_controller.shared_enemy.is_destroyed_wall(self):
-                        self.game_controller.shared_enemy.destroy_wall(self)
-                else:
-                    self.set_background_color("blue")
-                self.game_controller.timer_controller.switch_turn()
+                if not self.is_destroyed:
+                    if self.is_selected:
+                        self.game_controller.in_focus = True
+                        self.is_broken = True
+                        self.durability -= 1
+                        if self.durability == -1:
+                            self.setText(str(""))
+                        else:
+                            self.setText(str(self.durability))
+                        if self.is_broken and self.game_controller.shared_enemy.is_destroyed_wall(self):
+                            self.game_controller.shared_enemy.destroy_wall(self)
+                    else:
+                        self.set_background_color("blue")
+                    self.game_controller.timer_controller.switch_turn()
 
     def mouseReleaseEvent(self, event):
         if len(self.game_controller.shared_player.selected_cells) > 0:
