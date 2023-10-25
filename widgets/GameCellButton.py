@@ -74,7 +74,6 @@ class GameCellButton(QPushButton):
     def is_broken(self, value):
         self._is_broken = value
         self.set_background_color(f"yellow" if value else f"#D7CAC2")
-        self.durability -= 1
 
     @property
     def is_destroyed(self):
@@ -100,6 +99,7 @@ class GameCellButton(QPushButton):
             if not self.game_controller.enemy_turn and event.button() == Qt.MouseButton.LeftButton:
                 if self.is_selected:
                     self.is_broken = True
+                    self.durability -= 1
                     if self.is_broken and self.game_controller.shared_enemy.is_destroyed_wall(self):
                         self.game_controller.shared_enemy.destroy_wall(self)
                 else:
