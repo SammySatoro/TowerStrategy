@@ -34,6 +34,7 @@ class InterfaceGame(QFrame):
         self.game_controller.start_game()
 
     def generate_player_random_walls(self):
+        self.game_controller.shared_player.walls_durabilities = [3, 3, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         self.game_controller.shared_player.selected_combinations = self.get_random_walls()
 
     def get_random_walls(self):

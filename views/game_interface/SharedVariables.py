@@ -111,12 +111,15 @@ class SharedVariables():
             self.tower_battle_grid.grid_layout.itemAtPosition(cell[1], cell[0]).widget().is_selected = True
         self.assign_durability()
 
+
     def assign_durability(self):
         self.walls_durabilities = [3, 3, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         for cell in self.flatten_array(self._selected_combinations):
             durability = random.choice(self.walls_durabilities)
             self.tower_battle_grid.grid_layout.itemAtPosition(cell[1], cell[0]).widget().durability = durability
             self.walls_durabilities.remove(durability)
+        self.walls_durabilities = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
 
     def delete_wall(self, game_cell):
         self._selected_combinations.remove(game_cell.adjacent_cells)

@@ -31,6 +31,12 @@ class GameCellButton(QPushButton):
     def is_selected(self, value):
         self._is_selected = value
         if value:
+            if not self.is_enemy:
+                self.setText("1")
+                self._durability = 1
+            #     if self._durability in self.game_controller.shared_player.walls_durabilities:
+            #         self.game_controller.shared_player.walls_durabilities.remove(self._durability)
+            #     print(self.game_controller.shared_player.walls_durabilities)
             self.set_background_color(f"#D7CAC2" if self.is_enemy else f"green")
         else:
             self.set_background_color(f"#D7CAC2")
@@ -91,16 +97,39 @@ class GameCellButton(QPushButton):
         else:
             self.set_background_color(f"blue" if value else f"#D7CAC2")
 
+    def get_custom_durability(self):
+        durabilities = self.game_controller.shared_player.walls_durabilities
+        max_dur = max(durabilities)
+        durabilities.append(self._durability)
+        next_dur = \
+            (self._durability + 1 if self._durability + 1 in durabilities else max_dur) \
+                if self._durability < max_dur else 1
+        durabilities.remove(next_dur)
+        return next_dur
+
+
+
     def mousePressEvent(self, event):
+        global max
         if not self.is_enemy:
             if not self.game_controller.game_started:
                 if event.button() == Qt.MouseButton.LeftButton:
                     self.game_controller.shared_player.is_dragging = True
+                    if self.is_selected:
+                        self._durability = self.get_custom_durability()
+                        self.setText(str(self._durability))
+                        print(self.game_controller.shared_player.walls_durabilities)
+                        print(self._durability)
                 if event.button() == Qt.MouseButton.RightButton:
                     if self.is_selected:
+                        print(self.game_controller.shared_player.walls_durabilities)
+                        for cell in self.adjacent_cells:
+                            cell_dur = self.tower_battle_grid.grid_layout.itemAtPosition(cell[1],cell[0]).widget().durability
+                            self.game_controller.shared_player.walls_durabilities.remove(1)
+                            self.game_controller.shared_player.walls_durabilities.append(cell_dur)
                         self.game_controller.shared_player.delete_wall(self)
         else:
-            if not self.game_controller.enemy_turn and event.button() == Qt.MouseButton.LeftButton:
+            if not self.game_controller.is_paused and not self.game_controller.enemy_turn and event.button() == Qt.MouseButton.LeftButton:
                 if not self.is_destroyed:
                     if self.is_selected:
                         self.game_controller.in_focus = True
