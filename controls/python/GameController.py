@@ -29,7 +29,7 @@ class GameController(metaclass=GameControllerMeta):
         self.game_started = False
         self.enemy_turn = False
 
-        self.prolog_controller = PrologController("file.pl")
+        self.prolog_controller = PrologController("controls/prolog/file.pl")
         self.timer_controller.timer_button = None
         self.timer_controller.game_controller = self
 
@@ -106,14 +106,20 @@ class GameController(metaclass=GameControllerMeta):
         self.shared_player.clear_grid()
         self.shared_enemy.clear_grid()
         self.timer_controller.reset()
+        self.game_started = False
         self.is_paused = False
+        self.enemy_turn = False
+        self.in_focus = False
 
     def enemy_shoot(self):
-        print("SHOOT!!!")
+        # print("SHOOT!!!")
+        # print(f"PLAYER: {len(self.shared_player.cells)}")
+        # print(f"ENEMY: {len(self.shared_enemy.cells)}")
         target = self.shared_player.pick_random_cell()
-        # possible_cells = self.prolog_controller.pull_query(f"get_possible_cells({target}, Cells)")
-
-        print(target)
+        if target.is_selected:
+            # possible_cells = self.prolog_controller.pull_query(f"get_possible_cells({target}, Cells)")
+            self.in_focus = False
+            print(target)
         # print(possible_cells)
         for i in range(10):
             for j in range(10):

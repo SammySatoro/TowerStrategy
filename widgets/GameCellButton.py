@@ -69,10 +69,12 @@ class GameCellButton(QPushButton):
             if not self.game_controller.enemy_turn:
                 if [self.x, self.y] in self.game_controller.shared_enemy.cells:
                     self.game_controller.shared_enemy.cells.remove([self.x, self.y])
-                else:
-                    if [self.x, self.y] in self.game_controller.shared_player.cells:
-                        self.game_controller.shared_player.cells.remove([self.x, self.y])
+            else:
+                if [self.x, self.y] in self.game_controller.shared_player.cells:
+                    self.game_controller.shared_player.cells.remove([self.x, self.y])
             self.is_destroyed = True
+        # if self.game_controller.game_started:
+        #     print(f"enemy [{self.x}, {self.y}]" if self.is_enemy else f"player [{self.x}, {self.y}]")
 
     @property
     def is_broken(self):
@@ -110,7 +112,6 @@ class GameCellButton(QPushButton):
 
 
     def mousePressEvent(self, event):
-        global max
         if not self.is_enemy:
             if not self.game_controller.game_started:
                 if event.button() == Qt.MouseButton.LeftButton:
@@ -142,6 +143,7 @@ class GameCellButton(QPushButton):
                         if self.is_broken and self.game_controller.shared_enemy.is_destroyed_wall(self):
                             self.game_controller.shared_enemy.destroy_wall(self)
                     else:
+                        self.durability -= 1
                         self.set_background_color("blue")
                     self.game_controller.timer_controller.switch_turn()
 

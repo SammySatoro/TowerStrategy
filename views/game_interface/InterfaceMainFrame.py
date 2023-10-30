@@ -36,7 +36,9 @@ class InterfaceMainFrame(QFrame):
 
 
     def on_game_started(self):
-        self.stacked_interface_layout.setCurrentIndex(1)
+        durabilities = self.game_controller.shared_player.walls_durabilities
+        if not (3 in durabilities or 2 in durabilities):
+            self.stacked_interface_layout.setCurrentIndex(1)
 
     def change_layout(self):
         self.exit_confirmation_shown = not self.exit_confirmation_shown
