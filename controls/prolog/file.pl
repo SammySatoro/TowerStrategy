@@ -53,6 +53,7 @@ get_close_cells([X, Y], Cells) :-
 
 shoot(Cell, Data) :-
     shoot_(Cell),
+    remove_destroyed_from_possible_cells(Cell),
     possible_cells(Cells),
     Data = Cells.
 
@@ -65,6 +66,12 @@ shoot_([X, Y]) :-
         ;
         shoot_miss(M, X, Y, _), true
     ).
+
+remove_destroyed_from_possible_cells([X, Y]) :-
+    matrix(M),
+    possible_cells(PosCells),
+    get_element(M, X, Y, CellValue),
+    (once(member([X, Y], PosCells)), CellValue < 1 -> remove_value_from_possible_cells([X, Y]) ; true).
 
 shoot_hit(M, X, Y, CellValue) :-
     NewCellValue is CellValue - 1,
@@ -88,7 +95,7 @@ define_possible_cells :-
     (between(0, 9, SY) -> get_matrix_value(M, [X, SY], ValueSY) ; ValueSY = 0, true),
     (between(0, 9, EX) -> get_matrix_value(M, [EX, Y], ValueEX) ; ValueEX = 0, true),
     (between(0, 9, WX) -> get_matrix_value(M, [WX, Y], ValueWX) ; ValueWX = 0, true),
-    (Value > 1 -> append([[X, Y]], Cells0, Cells) ; Cells = Cells0, true),
+    (Value >= 1 -> append([[X, Y]], Cells0, Cells) ; Cells = Cells0, true),
     (ValueNY =\= -1, between(0, 9, NY), compare_cell_with_original_matrix([X, NY]), not_last_move([X, NY]), not_in_possible_cells([X, NY]) -> append([[X, NY]], Cells, Cells1) ; Cells1 = Cells, true),
     (ValueSY =\= -1, between(0, 9, SY), compare_cell_with_original_matrix([X, SY]), not_last_move([X, SY]), not_in_possible_cells([X, SY]) -> append([[X, SY]], Cells1, Cells2) ; Cells2 = Cells1, true),
     (ValueEX =\= -1, between(0, 9, EX), compare_cell_with_original_matrix([EX, Y]), not_last_move([EX, Y]), not_in_possible_cells([EX, Y]) -> append([[EX, Y]], Cells2, Cells3) ; Cells3 = Cells2, true),
@@ -130,6 +137,13 @@ random_cell(Result) :-
     cells(Cells),
     random_member(Cell, Cells),
     Result = Cell.
+
+remove_value_from_possible_cells(Value) :-
+    possible_cells(Cells),
+    select(Value, Cells, NewList),
+    write(NewList),
+    retract(possible_cells(_)),
+    assert(possible_cells(NewList)).
 
 remove_value_from_cells(Value) :-
     cells(Cells),

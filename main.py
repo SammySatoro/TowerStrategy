@@ -48,11 +48,12 @@ def test():
             print(item, end=" ")
         print()
 
-    print(list(prolog.query(f"shoot([7,9], Cells)"))[0]['Cells'])
-    print(list(prolog.query(f"shoot([6,9], Cells)"))[0]['Cells'])
+    print(list(prolog.query(f"shoot([1,2], Cells)"))[0]['Cells'])
+    print(list(prolog.query(f"shoot([1,3], Cells)"))[0]['Cells'])
+    print(list(prolog.query(f"shoot([1,4], Cells)"))[0]['Cells'])
 
-    print(list(prolog.query(f"matrix(M)")))
+    # print(list(prolog.query(f"matrix(M)")))
 
-# [[9, 8], [8, 9], [8, 7], [8, 8], [9, 9], [9, 7]]
+
 if __name__ == '__main__':
     test()
