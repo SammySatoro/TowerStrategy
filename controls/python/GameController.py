@@ -64,6 +64,7 @@ class GameController(metaclass=GameControllerMeta):
         self.enemy_turn = random.choice([True, True, False, False, False])
         self.timer_controller.start_timer()
         self.save_game()
+        self.prolog_controller.assertz(f"cells({self.shared_player.cells})")
         self.prolog_controller.assertz(f"matrix({self.get_durability_matrix()})")
 
     def get_durability_matrix(self):
@@ -75,31 +76,6 @@ class GameController(metaclass=GameControllerMeta):
                 print(self.shared_player.tower_battle_grid.children()[i * 10 + j + 1].durability, end=" ")
             print()
         return matrix
-
-        # matrix1 = [[0, 0, 0, 1, 0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 0, 1, 1, 0, 0], [0, 1, 0, 0, 0, 0, 1, 0, 0, 0],
-        #     [0, 3, 0, 0, 0, 0, 0, 0, 0, 1], [0, 1, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        #     [0, 2, 0, 1, 1, 2, 0, 1, 0, 1], [0, 0, 0, 0, 0, 0, 0, 0, 0, 1], [0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
-        #     [0, 0, 0, 0, 0, 0, 1, 1, 0, 0]]
-        #
-        # wall_cells = [[[7, 0], [7, 1], [6, 1], [6, 2]], [[1, 2], [1, 3], [1, 4]], [[3, 6], [4, 6], [5, 6]],
-        #     [[9, 6], [9, 7]], [[6, 9], [7, 9]], [[1, 8], [2, 8]], [[3, 0]], [[7, 6]], [[9, 3]], [[1, 6]]]
-        #
-
-        #
-        # self.prolog_controller.assertz(f"cells({cells})")
-        # self.prolog_controller.assertz(f"matrix({matrix1})")
-        # self.prolog_controller.assertz(f"wall_cells({wall_cells})")
-        #
-        # for row in range(10):
-        #     for col in range(10):
-        #         print(
-        #             int(self.shared_player.tower_battle_grid.grid_layout.itemAtPosition(row, col).widget().is_selected),
-        #             end=" "
-        #         )
-        #     print()
-        #
-        # print(self.get_wall_cells())
-
 
     def start_new_game(self):
         self.interface_main_frame.stacked_interface_layout.setCurrentIndex(0)
@@ -113,19 +89,14 @@ class GameController(metaclass=GameControllerMeta):
 
     def enemy_shoot(self):
         # print("SHOOT!!!")
-        # print(f"PLAYER: {len(self.shared_player.cells)}")
-        # print(f"ENEMY: {len(self.shared_enemy.cells)}")
+        print(f"PLAYER: {len(self.shared_player.cells)}")
+        print(f"ENEMY: {len(self.shared_enemy.cells)}")
         target = self.shared_player.pick_random_cell()
         if target.is_selected:
-            # possible_cells = self.prolog_controller.pull_query(f"get_possible_cells({target}, Cells)")
-            self.in_focus = False
-            print(target)
-        # print(possible_cells)
-        for i in range(10):
-            for j in range(10):
-                print(self.shared_enemy.tower_battle_grid.children()[i * 10 + j + 1].durability, end=" ")
-            print()
 
+            self.in_focus = True
 
-
-
+        cell = [target.x, target.y]
+        print(cell)
+        possible_cells = self.prolog_controller.pull_query(f"shoot({cell}, Cells)")
+        print(possible_cells)
