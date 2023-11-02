@@ -17,21 +17,21 @@ current_wall_cells([]).
 
 
 
-get_possible_cells(Cell, Cells) :-
-    matrix(M),
-    retractall(possible_cells(_)),
-    get_matrix_value(M, Cell, Value),
-
-    (Value =\= 0 ->
-        define_last_move(Cell),
-        define_possible_cells,
-        possible_cells(PosCells),
-        write(Value)
-        ;
-        PosCells = [],
-        true
-    ),
-    Cells = PosCells.
+%get_possible_cells(Cell, Cells) :-
+%    matrix(M),
+%    retractall(possible_cells(_)),
+%    get_matrix_value(M, Cell, Value),
+%
+%    (Value =\= 0 ->
+%        define_last_move(Cell),
+%        define_possible_cells,
+%        possible_cells(PosCells),
+%        write(Value)
+%        ;
+%        PosCells = [],
+%        true
+%    ),
+%    Cells = PosCells.
 
 get_close_cells([X, Y], Cells) :-
     T is Y - 1, B is Y + 1,
@@ -71,7 +71,7 @@ remove_destroyed_from_possible_cells([X, Y]) :-
     matrix(M),
     possible_cells(PosCells),
     get_element(M, X, Y, CellValue),
-    (once(member([X, Y], PosCells)), CellValue < 1 -> remove_value_from_possible_cells([X, Y]) ; true).
+    (once(member([X, Y], PosCells)), CellValue < 1 -> remove_value_from_possible_cells([X, Y]); true).
 
 shoot_hit(M, X, Y, CellValue) :-
     NewCellValue is CellValue - 1,

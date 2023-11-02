@@ -65,6 +65,7 @@ class GameCellButton(QPushButton):
                         cells_to_destroy = self.game_controller.prolog_controller.pull_query(f"get_close_cells({[cell[0], cell[1]]}, X)")[0]['X']
                         for ctd in cells_to_destroy:
                             self.tower_battle_grid.grid_layout.itemAtPosition(ctd[1], ctd[0]).widget().durability = -1
+                    self.game_controller.possible_targets = []
         if self._durability == -1:
             if not self.game_controller.enemy_turn:
                 if [self.x, self.y] in self.game_controller.shared_enemy.cells:

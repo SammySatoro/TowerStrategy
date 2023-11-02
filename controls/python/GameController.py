@@ -1,5 +1,5 @@
 import random
-
+from pyswip import Prolog
 from controls.python.JSONController import JSONController
 from controls.python.TimerController import TimerController
 from views.game_interface.SharedVariables import SharedVariablesManager
@@ -28,12 +28,12 @@ class GameController(metaclass=GameControllerMeta):
         self.is_paused = False
         self.game_started = False
         self.enemy_turn = False
-
         self.prolog_controller = PrologController("controls/prolog/file.pl")
         self.timer_controller.timer_button = None
         self.timer_controller.game_controller = self
 
         self.in_focus = False
+        self.possible_targets = []
 
 
     def check_game_save(self):
@@ -66,6 +66,14 @@ class GameController(metaclass=GameControllerMeta):
         self.save_game()
         self.prolog_controller.assertz(f"cells({self.shared_player.cells})")
         self.prolog_controller.assertz(f"matrix({self.get_durability_matrix()})")
+        self.prolog_controller.assertz(f"original_matrix({self.get_durability_matrix()})")
+
+        m = self.prolog_controller.pull_query(f"matrix(M)")[0]["M"]
+
+        for row in m:
+            for item in row:
+                print(item, end=" ")
+            print()
 
     def get_durability_matrix(self):
         matrix = []
@@ -88,15 +96,24 @@ class GameController(metaclass=GameControllerMeta):
         self.in_focus = False
 
     def enemy_shoot(self):
-        # print("SHOOT!!!")
-        print(f"PLAYER: {len(self.shared_player.cells)}")
-        print(f"ENEMY: {len(self.shared_enemy.cells)}")
-        target = self.shared_player.pick_random_cell()
-        if target.is_selected:
+        for i in range(10):
+            for j in range(10):
+                if [j, i] in self.shared_player.cells:
+                    print(self.shared_player.cells[i * 10 + j], end=" ")
+                else:
+                    print("[   ]")
+            print()
 
-            self.in_focus = True
+        if self.possible_targets:
+            target = self.pick_random_possible_target()
+        else:
+            target = self.shared_player.pick_random_cell()
+        print([target.x, target.y])
+        self.possible_targets = self.prolog_controller.pull_query(f"shoot({[target.x, target.y]}, Cells)")[0]["Cells"]
+        print(f"pos cells: {self.possible_targets}")
 
-        cell = [target.x, target.y]
-        print(cell)
-        possible_cells = self.prolog_controller.pull_query(f"shoot({cell}, Cells)")
-        print(possible_cells)
+    def pick_random_possible_target(self):
+        target = random.choice(self.possible_targets)
+        cell = self.shared_player.tower_battle_grid.grid_layout.itemAtPosition(target[1], target[0]).widget()
+        cell.durability -= 1
+        return cell
