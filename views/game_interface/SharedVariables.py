@@ -72,8 +72,7 @@ class SharedVariables():
 
 
     def pick_random_cell(self):                                    # to prolog
-        target = random.choice(self.available_cells)
-        # target = [int(input("X: ")), int(input("Y: "))]
+        target = random.choice(self.cells)
         cell = self.tower_battle_grid.grid_layout.itemAtPosition(target[1], target[0]).widget()
         cell.durability -= 1
         return cell

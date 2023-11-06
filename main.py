@@ -49,10 +49,14 @@ def test():
         print()
 
     print(list(prolog.query(f"shoot({[1,2]}, Cells)"))[0]['Cells'])
-    # print(list(prolog.query(f"shoot([1,3], Cells)"))[0]['Cells'])
-    # print(list(prolog.query(f"shoot([1,4], Cells)"))[0]['Cells'])
-    # print(list(prolog.query(f"shoot([1,3], Cells)"))[0]['Cells'])
-    # print(list(prolog.query(f"shoot([1,3], Cells)"))[0]['Cells'])
+    print(list(prolog.query(f"reset_possible_cells(X)")))
+    print(list(prolog.query(f"shoot([1,3], Cells)"))[0]['Cells'])
+    print(list(prolog.query(f"reset_possible_cells(X)")))
+    print(list(prolog.query(f"shoot([1,4], Cells)"))[0]['Cells'])
+    list(prolog.query(f"reset_possible_cells(X)"))
+    print(list(prolog.query(f"shoot([1,3], Cells)"))[0]['Cells'])
+    print(list(prolog.query(f"reset_possible_cells(X)")))
+    print(list(prolog.query(f"shoot([1,3], Cells)"))[0]['Cells'])
 
     m = list(prolog.query(f"matrix(M)"))[0]["M"]
 

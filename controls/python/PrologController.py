@@ -6,6 +6,9 @@ class PrologController:
         self.prolog = Prolog()
         self.prolog.consult(file)
 
+    def consult(self, file):
+        self.prolog.consult(file)
+
     def query(self, query):
         self.prolog.query(query)
 

@@ -13,7 +13,6 @@
 last_move.
 possible_cells([]).
 did_found_current_wall_cells(false).
-current_wall_cells([]).
 
 
 
@@ -83,6 +82,10 @@ shoot_miss(M, X, Y, _) :-
     remove_value_from_cells([X, Y]),
     update_matrix_item(M, [X, Y], NewCellValue).
 
+reset_possible_cells(Cells) :-
+    retractall(possible_cells(_)),
+    assertz(possible_cells([])),
+    possible_cells(Cells).
 
 define_possible_cells :-
     last_move([X, Y]),
@@ -124,10 +127,6 @@ not_last_move([X, Y]) :-
 not_in_possible_cells([X, Y]) :-
     \+ member([X, Y], possible_cells).
 
-
-clear_possible_cells :-
-    retractall(possible_cells(_)),
-    assertz(possible_cells([])).
 
 define_last_move(Value) :-
     retractall(last_move(_)),

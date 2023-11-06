@@ -59,13 +59,14 @@ class GameCellButton(QPushButton):
                     if self.tower_battle_grid.grid_layout.itemAtPosition(cell[1], cell[0]).widget().durability == 0:
                         cells_count -= 1
                 if cells_count == 0:
-                    self.game_controller.in_focus = False
                     for cell in self.adjacent_cells:
                         self.tower_battle_grid.grid_layout.itemAtPosition(cell[1], cell[0]).widget().durability = -1
                         cells_to_destroy = self.game_controller.prolog_controller.pull_query(f"get_close_cells({[cell[0], cell[1]]}, X)")[0]['X']
                         for ctd in cells_to_destroy:
                             self.tower_battle_grid.grid_layout.itemAtPosition(ctd[1], ctd[0]).widget().durability = -1
                     self.game_controller.possible_targets = []
+                    self.game_controller.focused_walls = []
+                    print(f"possible cells: {self.game_controller.prolog_controller.pull_query(f'reset_possible_cells(X)')}")
         if self._durability == -1:
             if not self.game_controller.enemy_turn:
                 if [self.x, self.y] in self.game_controller.shared_enemy.cells:
@@ -134,7 +135,6 @@ class GameCellButton(QPushButton):
             if not self.game_controller.is_paused and not self.game_controller.enemy_turn and event.button() == Qt.MouseButton.LeftButton:
                 if not self.is_destroyed:
                     if self.is_selected:
-                        self.game_controller.in_focus = True
                         self.is_broken = True
                         self.durability -= 1
                         if self.durability == -1:

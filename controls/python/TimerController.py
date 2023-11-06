@@ -18,13 +18,13 @@ class TimerController(metaclass=TimerControllerMeta):
     def __init__(self):
         self._move_duration = {
             True: 2,
-            False: 10
+            False: 1
         }
         self._game_start_duration = 3
         self._current_time = 3
 
         self.timer = QTimer()
-        self._duration = 1000
+        self._duration = 25
         self.timer_button = QPushButton()
         self.game_controller = None
         self.timer.timeout.connect(self.on_timeout)
@@ -54,7 +54,7 @@ class TimerController(metaclass=TimerControllerMeta):
         if self.game_controller.enemy_turn:
             self._move_duration[self.game_controller.enemy_turn] = 2
         else:
-            self._move_duration[self.game_controller.enemy_turn] = 10
+            self._move_duration[self.game_controller.enemy_turn] = 1
         self.game_controller.enemy_turn = not self.game_controller.enemy_turn
 
 
@@ -86,7 +86,7 @@ class TimerController(metaclass=TimerControllerMeta):
         self.timer.stop()
         self._move_duration = {
                 True: 2,
-                False: 10
+                False: 1
             }
         self._game_start_duration = 3
         self._current_time = 3

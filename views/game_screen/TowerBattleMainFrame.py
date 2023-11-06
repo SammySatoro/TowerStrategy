@@ -1,6 +1,8 @@
-from PyQt6.QtWidgets import QStackedLayout, QFrame
+from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QStackedLayout, QFrame, QHBoxLayout, QLabel
 
 from controls.python.GameController import GameController
+from views.game_screen.GameOverView import GameOverView
 from views.game_screen.TowerBattleGrid import TowerBattleGrid
 from views.game_screen.TowerBattleLayout import TowerBattleLayout
 
@@ -20,10 +22,12 @@ class TowerBattleMainFrame(QFrame):
         self.tower_battle_grid_enemy = TowerBattleGrid(is_enemy=True)
         self.tower_battle_grid_enemy.setObjectName("towerBattleGridEnemy")
         self.game_controller.shared_enemy.tower_battle_grid = self.tower_battle_grid_enemy
+        self.game_over_box = GameOverView()
 
         self.stacked_tower_battle_layout = QStackedLayout()
         self.stacked_tower_battle_layout.addWidget(self.tower_battle_grid_player)
         self.stacked_tower_battle_layout.addWidget(self.tower_battle_grid_enemy)
+        self.stacked_tower_battle_layout.addWidget(self.game_over_box)
 
         self.tower_battle_frame.tower_battle_layout_frame.setLayout(self.stacked_tower_battle_layout)
 
