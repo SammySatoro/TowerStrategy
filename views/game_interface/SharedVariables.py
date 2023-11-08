@@ -104,6 +104,7 @@ class SharedVariables():
         for row in range(10):
             for col in range(10):
                 self.tower_battle_grid.grid_layout.itemAtPosition(row, col).widget().clear_state()
+                self.tower_battle_grid.grid_layout.itemAtPosition(row, col).widget().durability = 0
                 self.tower_battle_grid.grid_layout.itemAtPosition(row, col).widget().adjacent_cells = []
         self.cells = [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0], [8, 0], [9, 0], [0, 1], [1, 1],
             [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1], [8, 1], [9, 1], [0, 2], [1, 2], [2, 2], [3, 2], [4, 2],

@@ -19,7 +19,6 @@ class GameControllerMeta(type):
 
 class GameController(metaclass=GameControllerMeta):
     def __init__(self):
-        self.save_file = JSONController.get_absolute_path_to_config_json("game_save.json")
         self.shared_player = SharedVariablesManager().shared_variables_player
         self.shared_enemy = SharedVariablesManager().shared_variables_enemy
         self.interface_main_frame = None
@@ -28,7 +27,7 @@ class GameController(metaclass=GameControllerMeta):
         self.is_paused = False
         self.game_started = False
         self.enemy_turn = False
-        self.prolog_controller = PrologController("controls/prolog/file.pl")
+        self.prolog_controller = None
         self.timer_controller.timer_button = None
         self.timer_controller.game_controller = self
         self.original_matrix = []
@@ -36,20 +35,6 @@ class GameController(metaclass=GameControllerMeta):
         self.focused_walls = []
 
 
-    def check_game_save(self):
-        print(JSONController().json_file_has_records(self.save_file))
-        return JSONController().json_file_has_records(self.save_file)
-
-    def load_game_save(self):
-        if self.check_game_save():
-            pass
-
-    def save_game(self):
-        data = {
-            "player": self.shared_player.tower_battle_grid.get_cells_data(),
-            "enemy": self.shared_enemy.tower_battle_grid.get_cells_data()
-        }
-        JSONController().save_data_to_json(data, self.save_file)
 
     def get_wall_cells(self):
         wall_cells = []
@@ -64,16 +49,8 @@ class GameController(metaclass=GameControllerMeta):
         self.enemy_turn = random.choice([True, True, False, False, False])
         self.original_matrix = self.get_durability_matrix()
         self.timer_controller.start_timer()
-        self.save_game()
 
         self.assert_prolog_variables()
-
-        m = self.prolog_controller.pull_query(f"matrix(M)")[0]["M"]
-
-        for row in m:
-            for item in row:
-                print(item, end=" ")
-            print()
 
     def assert_prolog_variables(self):
         self.prolog_controller.assertz(f"cells({self.shared_player.cells})")
@@ -92,12 +69,16 @@ class GameController(metaclass=GameControllerMeta):
 
     def start_new_game(self):
         self.interface_main_frame.stacked_interface_layout.setCurrentIndex(0)
+        self.tower_battle_main_frame.stacked_tower_battle_layout.setCurrentIndex(0)
+        self.prolog_controller = PrologController("controls/prolog/file.pl")
         self.shared_player.clear_grid()
         self.shared_enemy.clear_grid()
         self.timer_controller.reset()
         self.game_started = False
         self.is_paused = False
         self.enemy_turn = False
+        self.possible_targets = []
+        self.focused_walls = []
 
     def enemy_shoot(self):
         if self.possible_targets:
@@ -112,7 +93,13 @@ class GameController(metaclass=GameControllerMeta):
                 self.timer_controller.stop_main_timer()
                 self.tower_battle_main_frame.stacked_tower_battle_layout.setCurrentIndex(2)
                 print("GAME OVER!!!")
+                return
         self.possible_targets = self.get_possible_targets(target.x, target.y)
+        # print("MATRIX\n")
+        # for i in range(10):
+        #     for j in range(10):
+        #         print(self.shared_player.tower_battle_grid.children()[i * 10 + j + 1].durability, end=" ")
+        #     print()
 
     def pick_random_possible_target(self):
         target = random.choice(self.possible_targets)

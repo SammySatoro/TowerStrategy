@@ -190,6 +190,3 @@ class GameCellButton(QPushButton):
         self.is_broken = False
         self.is_destroyed = False
 
-    def on_shot(self):
-        if not self.is_enemy:
-            pass
